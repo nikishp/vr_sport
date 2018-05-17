@@ -1,13 +1,112 @@
-/* head style */ 
- 
+.header
+  position: relative
+  padding: 20px 0
+  // font-size: 0
+  // outline: $out
+  background: $f
+  .row
+    align-items: center
+    +m480-block()
+      justify-content: space-between
+.header__item
+  +col()
+  order: 3
+  &:nth-child(1)
+    +cols(1.5)
+    +cols-md(2)
+    +cols-sm(4)
+    +cols-m480(12)
+    +sm-block()
+      order: 2
+    +m480-block() 
+      order: 1
+    // background: green
+  &:nth-child(2)
+    +cols(7.5)
+    +cols-md(7)
+    +cols-sm(4) 
+    +sm-block()
+      order: 1
+    // background: rgba(0, 0, 0, 0.1)
+  &:nth-child(3)
+    +cols(3)
+    +cols-sm(4)
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    // background: red
+.header__logo
+  display: block
+  font-size: 0
+  +sm-block()
+    text-align: center
+  // background: red
 
 
 
 
 
+.header__media
+  font-size: 18px
+  font-weight: bold
+  color: rgba(97, 98, 168, 1)
+  +lg-block()
+    margin-right: auto
+  +md-block()
+    display: none
+.header__media-link
+  &:first-child
+    margin-right: 30px
+    +m1400-block()
+      margin-right: 10px
+  +lg-block()
+    display: block
+    // background: #000
+.header__user
+  display: flex
+  // justify-content: flex-end
+  align-items: center
+  margin-left: 40px
+  +m1400-block()
+    margin-left: 20px
+  +lg-block()
+    margin-left: 0
+  .svg
+    +size(20)
+    transition: $tr
 
 
-
+.user__basket
+  position: relative
+  font-size: 0
+  // background: green
+.user__basket-count
+  position: absolute
+  top: 0
+  left: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 22px;
+  height: 22px;
+  font-size: 12px
+  line-height: 1
+  color: $f
+  border-radius: 50%;
+  background-color: rgb(235, 41, 54);
+  transform: translateX(50%) translateY(-50%)
+.user__door
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 37px;
+  height: 37px;
+  margin-left: 40px
+  font-size: 0
+  border-radius: 50%;
+  background-color: rgb(97, 98, 168);
+  .svg
+    fill: $f
 
 
 

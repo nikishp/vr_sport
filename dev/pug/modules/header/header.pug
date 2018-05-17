@@ -1,7 +1,23 @@
 mixin header(name)
   - name = name || ''
   header(class="header " + name)
-    +menuClick()
+    .container
+      .row
+        .header__item
+          a.header__logo(href="#"): img(src="img/content/logo.png", alt="image")
+        .header__item
+          +menuClick()
+        .header__item 
+          .header__media  
+            a.header__media-link(href="#") Market 
+            a.header__media-link(href="#") TV program 
+          .header__user
+            a.user__basket(href="#") 
+              +svg('basket') 
+              span.user__basket-count 41
+            a.user__door(href="#")
+              +svg("user")
+
 
 
 

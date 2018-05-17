@@ -5,15 +5,21 @@ var settings = {
   //  filename: "smart-grid",
   outputStyle: "sass",
   columns: 12,
-  offset: "30px", // отступ межу столбцами
+  offset: "20px", // отступ межу столбцами
   mobileFirst: false,
   container: {
-    maxWidth: "1200px",
-    fields: "30px"
+    maxWidth: "1660px",
+    fields: "20px"
   },
   breakPoints: {
+    m1400: {
+      width: "1400px"
+    },
     lg: {
       width: "1200px"
+    },
+    m1040: {
+      width: "1040px"
     },
     md: {
       width: "992px",
@@ -27,6 +33,12 @@ var settings = {
     },
     xs: {
       width: "576px"
+    },
+    m500: {
+      width: "500px"
+    },
+    m480: {
+      width: "480px"
     },
     xxs: {
       width: "380px"

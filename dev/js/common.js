@@ -4,7 +4,7 @@ $(function() {
 
     svg4everybody();
     objectFitImages();
-
+    var windowWidht = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     var $form = $('.form');
 
     $form.on('click', function(event) {
@@ -16,17 +16,17 @@ $(function() {
         localStorage.setItem('currentPage', pageName);
     });
 
-    //	E-mail Ajax Send
+    //  E-mail Ajax Send
     $form.each(function() {
         //    var $this = $(this);
         $(this).validate({
 
             // rules: {
-            // 	phone: {
-            // 		required: true,
-            // 		minlength: 6,
-            // 		number: true
-            // 	}
+            //  phone: {
+            //    required: true,
+            //    minlength: 6,
+            //    number: true
+            //  }
             // }, 
 
             submitHandler: function(form) {
@@ -54,7 +54,7 @@ $(function() {
                     });
                     $(form).trigger("reset");
                     $.magnificPopup.close();
-                    //window.location.href = "thanks.html";
+                    //window.location.href = "thanks.html"; 
                     console.log('done')
                 }).fail(function() {
                     alert("Error, email not sent !");
@@ -84,76 +84,91 @@ $(function() {
     // $(".phone").mask("+9(999)999-99-99");
 
     //animate pege element
-    //	 if (screen.width > 768) {
-    //	   $(".mission h2").animated("bounceIn");
-    //		 $(".mission h2").css('animation-delay', '0.5s').animated("bounceInLeft");
-    //	 };
+    //   if (screen.width > 768) {
+    //     $(".mission h2").animated("bounceIn");
+    //     $(".mission h2").css('animation-delay', '0.5s').animated("bounceInLeft");
+    //   };
 
     //form styler
     // $('input, select').styler();
 
-    alignMenu();
+    if (windowWidht > 768) {
 
-    $(window).resize(function() {
-        $("#horizontal").append($("#horizontal li.hideshow ul").html());
-        $("#horizontal li.hideshow").remove();
+
         alignMenu();
+
+        $(window).resize(function() {
+            $("#horizontal").append($("#horizontal li.hideshow ul").html());
+            $("#horizontal li.hideshow").remove();
+            alignMenu();
+        });
+
+        var mw = $("#horizontal").width();
+
+        function alignMenu() {
+            var w = 0;
+            // var mw = $("#horizontal").width() - 100;
+            var mw = $("#horizontal").width();
+            var i = -1;
+            var menuhtml = '';
+            jQuery.each($("#horizontal").children(), function() {
+                i++;
+                w += $(this).outerWidth(true);
+                if (mw < w) {
+                    menuhtml += $('<div>').append($(this).clone()).html();
+                    $(this).remove();
+                }
+            });
+            $("#horizontal").append(
+                '<li  style="position:relative;"  class="hideshow">' +
+                '<a href="#">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path class="dots__border" d="M16 5c0-.6-.4-1-1-1H1c-.6 0-1 .4-1 1v6c0 .6.4 1 1 1h14c.6 0 1-.4 1-1V5zm-1 6H1V5h14v6z"/><path class="dots__circle" d="M6 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM12 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>' +
+                '</a><ul>' + menuhtml + '</ul></li>');
+            $("#horizontal li.hideshow ul").css("top",
+                $("#horizontal li.hideshow").outerHeight(true) + "px");
+            $("#horizontal li.hideshow").click(function() {
+                $(this).children("ul").toggle();
+            });
+            if (menuhtml == '') {
+                $("#horizontal li.hideshow").hide();
+            } else {
+                $("#horizontal li.hideshow").show();
+            }
+        }
+    } else {
+        $('.menu-btn,#horizontal li').on('click', function(event) {
+            $(".hamburger").stop(true, true).toggleClass('is-active');
+            $('#horizontal').stop(true, true).slideToggle();
+        });
+    };
+
+
+    // switch
+    var $swToggle = $('.switch__toggle'),
+        $swToggleActive = 'switch__toggle--active',
+        $swToggleItem = $('.switch__toggle li'),
+        $swList = $('.switch__list'),
+        $swListItem = $('.switch__list li'),
+        $swData,
+        $swActiveContent,
+        $swDefContent = $('.switch__list li:first-child').html();
+
+    $swToggleItem.html($swDefContent);
+
+    $swToggle.on('click', function(event) {
+        $(this).stop(true, true).toggleClass($swToggleActive);
+        $swList.stop(true, true).slideToggle(100);
     });
 
-    // function alignMenu() {
-    //     var w = 0;
-    //     var mw = $("#horizontal").width() - 150;
-    //     var i = -1;
-    //     var menuhtml = '';
-    //     jQuery.each($("#horizontal").children(), function() {
-    //         i++;
-    //         w += $(this).outerWidth(true);
-    //         if (mw < w) {
-    //             menuhtml += $('<div>').append($(this).clone()).html();
-    //             $(this).remove();
-    //         }
-    //     });
-    //     $("#horizontal").append(
-    //         '<li  style="position:relative;" href="#" class="hideshow">' +
-    //         '<a href="#">more ' +
-    //         '<span style="font-size:13px">&#8595;</span>' +
-    //         '</a><ul>' + menuhtml + '</ul></li>');
-    //     $("#horizontal li.hideshow ul").css("top",
-    //         $("#horizontal li.hideshow").outerHeight(true) + "px");
-    //     $("#horizontal li.hideshow").click(function() {
-    //         $(this).children("ul").toggle();
-    //     });
-    // }
+    $swListItem.on('click', function(event) {
+        $swActiveContent = $(this).html();
+        $swData = $(this).data('switch');
+        console.log("$swData", $swData);
+        $swToggle.stop(true, true).toggleClass($swToggleActive);
+        $swList.stop(true, true).slideToggle(100);
+        $swToggleItem.html($swActiveContent);
+    });
 
-    function alignMenu() {
-        var w = 0;
-        var mw = $("#horizontal").width() - 150;
-        var i = -1;
-        var menuhtml = '';
-        jQuery.each($("#horizontal").children(), function() {
-            i++;
-            w += $(this).outerWidth(true);
-            if (mw < w) {
-                menuhtml += $('<div>').append($(this).clone()).html();
-                $(this).remove();
-            }
-        });
-        $("#horizontal").append(
-            '<li  style="position:relative;"  class="hideshow">' +
-            '<a href="#">more ' +
-            '<span style="font-size:13px">&#8595;</span>' +
-            '</a><ul>' + menuhtml + '</ul></li>');
-        $("#horizontal li.hideshow ul").css("top",
-            $("#horizontal li.hideshow").outerHeight(true) + "px");
-        $("#horizontal li.hideshow").click(function() {
-            $(this).children("ul").toggle();
-        });
-        if (menuhtml == '') {
-            $("#horizontal li.hideshow").hide();
-        } else {
-            $("#horizontal li.hideshow").show();
-        }
-    }
 
 
 }); //jQuery

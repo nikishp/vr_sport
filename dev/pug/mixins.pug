@@ -2,3 +2,49 @@ mixin svg(name,mod)
   - mod = mod || ''
   svg(class="svg svg__" + name + ' ' + mod) 
     use(xlink:href="img/svg/symbol/sprite.svg#" + name)
+
+
+mixin main_info()
+  .main-info
+    .container
+      .row
+        .col.col--main-info
+          .main-info__media
+            h1.h1 Turn up in reality!
+            a.main-info__link(href="#") stawka.com
+          a.main-info__btn(href="#").btn.btn--red.btn--md Place bet
+
+mixin main_panel()
+  .main-panel
+    .container.container--bg
+      .row
+        .col.col--main-panel
+          .main-panel__item
+            a.s-btn(href="#") top
+            .main-panel__event
+              .main-panel__event-item
+                .event-item__title Final
+                a.event-item__option(href="#")
+                  span.event-item__option-name
+                    span.event-item__option-name-img
+                      img(src="img/general/event_img.png", alt="image")
+                    | tuk
+                  span.event-item__option-count 99
+                a.event-item__option(href="#")
+                  span.event-item__option-name
+                    span.event-item__option-name-img
+                      img(src="img/general/event_img2.png", alt="image")
+                    | for
+                  span.event-item__option-count 100
+     
+          .main-panel__item
+            .switch
+              ul.switch__toggle
+                li.switch__item switch__toggle 
+              ul.switch__list
+                li.switch__item(data-switch="sw1")
+                  img(src="img/content/uk.svg", alt="image")
+                li.switch__item(data-switch="sw2")
+                  img(src="img/content/ukr.svg", alt="image")
+                li.switch__item(data-switch="sw3")
+                  img(src="img/content/rf.svg", alt="image")

@@ -6,9 +6,11 @@ html(lang="ru-RU")
     block head
     +head()
   body(class=""+bodyClass)
-    +header()
-    block content  
-    +foot() 
-    +hidden()
+    .glogal-wrap
+        +header()
+        //- .wrapper
+        block content  
+        +foot() 
+        +hidden()
     +script() 
     block script
