@@ -32,8 +32,11 @@ module.exports = function() {
 
     //slick-carousel
     //http://kenwheeler.github.io/slick/
-    'dev/libs/slick-carousel/slick/slick.js',
+    // 'dev/libs/slick-carousel/slick/slick.js',
     // 'node_modules/slick-carousel/slick/slick.js',
+
+    'node_modules/swiper/dist/js/swiper.js',
+
 
     //bxSlider
     //'dev/libs/jquery.bxslider/jquery.bxslider.min.js',

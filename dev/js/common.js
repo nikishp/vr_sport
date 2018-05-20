@@ -1,6 +1,6 @@
 //$(document).ready(function() {
 
-$(function() {
+  $(function() {
 
     svg4everybody();
     objectFitImages();
@@ -8,13 +8,13 @@ $(function() {
     var $form = $('.form');
 
     $form.on('click', function(event) {
-        var formId = $(this).attr("id");
+      var formId = $(this).attr("id");
         // console.log('formId ' + formId); 
         localStorage.setItem('form', formId);
         var pageName = window.location.pathname;
         // console.log('pageName ' + pageName);
         localStorage.setItem('currentPage', pageName);
-    });
+      });
 
     //  E-mail Ajax Send
     $form.each(function() {
@@ -30,54 +30,54 @@ $(function() {
             // }, 
 
             submitHandler: function(form) {
-                var formData = new FormData(form);
-                $.ajax({
-                    type: "POST",
-                    url: "mail.php",
-                    data: formData,
-                    contentType: false,
-                    dataType: "json",
-                    processData: false,
-                    beforeSend: function() {
-                        $(form).find('.btn').attr("disabled", true);
-                        $(form).find('.form-load').css({
-                            'width': '20px',
-                            'margin-left': '10px'
-                        });
-                        console.log('before send')
-                    }
-                }).done(function() {
-                    $(form).find('.btn').attr("disabled", false);
-                    $(form).find('.form-load').css({
-                        'width': '0',
-                        'margin-left': '0'
-                    });
-                    $(form).trigger("reset");
-                    $.magnificPopup.close();
+              var formData = new FormData(form);
+              $.ajax({
+                type: "POST",
+                url: "mail.php",
+                data: formData,
+                contentType: false,
+                dataType: "json",
+                processData: false,
+                beforeSend: function() {
+                  $(form).find('.btn').attr("disabled", true);
+                  $(form).find('.form-load').css({
+                    'width': '20px',
+                    'margin-left': '10px'
+                  });
+                  console.log('before send')
+                }
+              }).done(function() {
+                $(form).find('.btn').attr("disabled", false);
+                $(form).find('.form-load').css({
+                  'width': '0',
+                  'margin-left': '0'
+                });
+                $(form).trigger("reset");
+                $.magnificPopup.close();
                     //window.location.href = "thanks.html"; 
                     console.log('done')
-                }).fail(function() {
+                  }).fail(function() {
                     alert("Error, email not sent !");
                     console.log('error')
-                });
-            }
-        });
-    });
+                  });
+                }
+              });
+      });
 
     //popup form
     $('.popup-js').magnificPopup({
-        type: 'inline',
-        preloader: false,
-        focus: '#name',
-        callbacks: {
-            beforeOpen: function() {
-                if ($(window).width() < 700) {
-                    this.st.focus = false;
-                } else {
-                    this.st.focus = '#name';
-                }
-            }
+      type: 'inline',
+      preloader: false,
+      focus: '#name',
+      callbacks: {
+        beforeOpen: function() {
+          if ($(window).width() < 700) {
+            this.st.focus = false;
+          } else {
+            this.st.focus = '#name';
+          }
         }
+      }
     });
 
     //phone mask
@@ -95,79 +95,134 @@ $(function() {
     if (windowWidht > 768) {
 
 
+      alignMenu();
+
+      $(window).resize(function() {
+        $("#horizontal").append($("#horizontal li.hideshow ul").html());
+        $("#horizontal li.hideshow").remove();
         alignMenu();
+      });
 
-        $(window).resize(function() {
-            $("#horizontal").append($("#horizontal li.hideshow ul").html());
-            $("#horizontal li.hideshow").remove();
-            alignMenu();
-        });
+      var mw = $("#horizontal").width();
 
-        var mw = $("#horizontal").width();
-
-        function alignMenu() {
-            var w = 0;
+      function alignMenu() {
+        var w = 0;
             // var mw = $("#horizontal").width() - 100;
             var mw = $("#horizontal").width();
             var i = -1;
             var menuhtml = '';
             jQuery.each($("#horizontal").children(), function() {
-                i++;
-                w += $(this).outerWidth(true);
-                if (mw < w) {
-                    menuhtml += $('<div>').append($(this).clone()).html();
-                    $(this).remove();
-                }
+              i++;
+              w += $(this).outerWidth(true);
+              if (mw < w) {
+                menuhtml += $('<div>').append($(this).clone()).html();
+                $(this).remove();
+              }
             });
             $("#horizontal").append(
-                '<li  style="position:relative;"  class="hideshow">' +
-                '<a href="#">' +
-                '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path class="dots__border" d="M16 5c0-.6-.4-1-1-1H1c-.6 0-1 .4-1 1v6c0 .6.4 1 1 1h14c.6 0 1-.4 1-1V5zm-1 6H1V5h14v6z"/><path class="dots__circle" d="M6 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM12 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>' +
-                '</a><ul>' + menuhtml + '</ul></li>');
+              '<li  style="position:relative;"  class="hideshow">' +
+              '<a href="#">' +
+              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path class="dots__border" d="M16 5c0-.6-.4-1-1-1H1c-.6 0-1 .4-1 1v6c0 .6.4 1 1 1h14c.6 0 1-.4 1-1V5zm-1 6H1V5h14v6z"/><path class="dots__circle" d="M6 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM12 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>' +
+              '</a><ul>' + menuhtml + '</ul></li>');
             $("#horizontal li.hideshow ul").css("top",
-                $("#horizontal li.hideshow").outerHeight(true) + "px");
+              $("#horizontal li.hideshow").outerHeight(true) + "px");
             $("#horizontal li.hideshow").click(function() {
-                $(this).children("ul").toggle();
+              $(this).children("ul").toggle();
             });
             if (menuhtml == '') {
-                $("#horizontal li.hideshow").hide();
+              $("#horizontal li.hideshow").hide();
             } else {
-                $("#horizontal li.hideshow").show();
+              $("#horizontal li.hideshow").show();
             }
-        }
-    } else {
-        $('.menu-btn,#horizontal li').on('click', function(event) {
+          }
+        } else {
+          $('.menu-btn,#horizontal li').on('click', function(event) {
             $(".hamburger").stop(true, true).toggleClass('is-active');
             $('#horizontal').stop(true, true).slideToggle();
-        });
-    };
+          });
+        };
 
 
     // switch
     var $swToggle = $('.switch__toggle'),
-        $swToggleActive = 'switch__toggle--active',
-        $swToggleItem = $('.switch__toggle li'),
-        $swList = $('.switch__list'),
-        $swListItem = $('.switch__list li'),
-        $swData,
-        $swActiveContent,
-        $swDefContent = $('.switch__list li:first-child').html();
+    $swToggleActive = 'switch__toggle--active',
+    $swToggleItem = $('.switch__toggle li'),
+    $swList = $('.switch__list'),
+    $swListItem = $('.switch__list li'),
+    $swData,
+    $swActiveContent,
+    $swDefContent = $('.switch__list li:first-child').html();
 
     $swToggleItem.html($swDefContent);
 
     $swToggle.on('click', function(event) {
-        $(this).stop(true, true).toggleClass($swToggleActive);
-        $swList.stop(true, true).slideToggle(100);
+      $(this).stop(true, true).toggleClass($swToggleActive);
+      $swList.stop(true, true).slideToggle(100);
     });
 
     $swListItem.on('click', function(event) {
-        $swActiveContent = $(this).html();
-        $swData = $(this).data('switch');
-        console.log("$swData", $swData);
-        $swToggle.stop(true, true).toggleClass($swToggleActive);
-        $swList.stop(true, true).slideToggle(100);
-        $swToggleItem.html($swActiveContent);
+      $swActiveContent = $(this).html();
+      $swData = $(this).data('switch');
+      console.log("$swData", $swData);
+      $swToggle.stop(true, true).toggleClass($swToggleActive);
+      $swList.stop(true, true).slideToggle(100);
+      $swToggleItem.html($swActiveContent);
     });
+
+
+
+
+
+
+
+  //   $('.main-panel__event').slick({
+  //     slidesToShow: 3,
+  //    arrows:true,
+  //    prevArrow:'<button type="button" class="slide-btn slide-btn__prev"></button>',
+  //    nextArrow:'<button type="button" class="slide-btn slide-btn__next"></button>',
+  //    responsive:[{
+  //      breakpoint: 3900,
+  //      settings: "unslick"
+  //    },
+  //    {
+  //     breakpoint: 1399,
+  //     settings: "slick"
+  //   },
+  //   {
+  //     breakpoint: 640,
+  //     settings: {
+  //       slidesToShow: 1
+  //     }
+  //   }]
+  // });
+
+var swiper = new Swiper('.main-panel__event', {
+  // Default parameters
+  slidesPerView: 4,
+  spaceBetween: 40,
+  // Responsive breakpoints
+  breakpoints: {
+    // when window width is <= 320px
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 10
+    },
+    // when window width is <= 480px
+    480: {
+      slidesPerView: 2,
+      spaceBetween: 20
+    },
+    // when window width is <= 640px
+    640: {
+      slidesPerView: 3,
+      spaceBetween: 30
+    }
+  }
+})
+
+
+
+
 
 
 
@@ -176,13 +231,13 @@ $(function() {
 
 //removeIf(production)
 function pageWidget(pages) {
-    var widgetWrap = $('<div class="widget_wrap"><ul  class="widget_list"></ul></div>');
-    widgetWrap.prependTo("body");
-    for (var i = 0; i < pages.length; i++) {
-        $('<li class="widget_item"><a class="widget_link" href="' + pages[i] + '.html' + '">' + pages[i] + '</a></li>').appendTo('.widget_list')
-    }
-    var widgetStilization = $('<style>body{position:relative}.widget_wrap{position:fixed;top:0;left:-23px;z-index:9999;padding:10px 20px;background:#222;border-bottom-right-radius:10px;transition:all .3s ease;transform:translate(-100%,0)}.widget_wrap ul{max-width:220px;width:100%;display:flex;flex-wrap:wrap}.widget_wrap:after{content:" ";position:absolute;top:0;left:100%;width:24px;height:24px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAABGdBTUEAALGPC/xhBQAAAAxQTFRF////////AAAA////BQBkwgAAAAN0Uk5TxMMAjAd+zwAAACNJREFUCNdjqP///y/DfyBg+LVq1Xoo8W8/CkFYAmwA0Kg/AFcANT5fe7l4AAAAAElFTkSuQmCC) 50% 50% no-repeat #222;cursor:pointer}.widget_wrap:hover{left:0;transform:translate(0,0)}.widget_item{padding:0 0 10px}.widget_link{display:block;color:#fff;text-decoration:none;font-size:15px;width:100px}.widget_link:hover{color:#fff;text-decoration:underline}</style>');
-    widgetStilization.prependTo(".widget_wrap")
+  var widgetWrap = $('<div class="widget_wrap"><ul  class="widget_list"></ul></div>');
+  widgetWrap.prependTo("body");
+  for (var i = 0; i < pages.length; i++) {
+    $('<li class="widget_item"><a class="widget_link" href="' + pages[i] + '.html' + '">' + pages[i] + '</a></li>').appendTo('.widget_list')
+  }
+  var widgetStilization = $('<style>body{position:relative}.widget_wrap{position:fixed;top:0;left:-23px;z-index:9999;padding:10px 20px;background:#222;border-bottom-right-radius:10px;transition:all .3s ease;transform:translate(-100%,0)}.widget_wrap ul{max-width:220px;width:100%;display:flex;flex-wrap:wrap}.widget_wrap:after{content:" ";position:absolute;top:0;left:100%;width:24px;height:24px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAABGdBTUEAALGPC/xhBQAAAAxQTFRF////////AAAA////BQBkwgAAAAN0Uk5TxMMAjAd+zwAAACNJREFUCNdjqP///y/DfyBg+LVq1Xoo8W8/CkFYAmwA0Kg/AFcANT5fe7l4AAAAAElFTkSuQmCC) 50% 50% no-repeat #222;cursor:pointer}.widget_wrap:hover{left:0;transform:translate(0,0)}.widget_item{padding:0 0 10px}.widget_link{display:block;color:#fff;text-decoration:none;font-size:15px;width:100px}.widget_link:hover{color:#fff;text-decoration:underline}</style>');
+  widgetStilization.prependTo(".widget_wrap")
 };
 pageWidget(['index', 'thanks'])
 

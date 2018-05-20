@@ -112,6 +112,9 @@
 
 
 // the necessary styles of switch
+.switch
+  flex-shrink: 0
+
 .switch__toggle
   position: relative
   display: inline-flex
@@ -142,19 +145,58 @@
   img
     +size(30,27)
 
+.main-panel__item--last
+  display: flex
+  align-items: center
+  width: 100%
+  justify-content: space-between
+  padding: 0 20px
+
+.search
+  margin: 0
+.search__item
+  position: relative
+  height: 30px
+  width: 100%
+  input
+    display: block
+    height: 100%
+    width: 100%
+    padding: 0 15px
+    padding-right: 30px
+    border-radius: 30px
+    border: 1px solid #dbdbdb
+  .svg
+    position: absolute
+    top: 0
+    bottom: 0
+    right: 20px
+    +size(20)
+    margin: auto
 
 
+.share
 
+  .svg
+    +size(20)
 
-
-
-
-
-
-
-
-
-
+.share__item
+  position: relative
+  // outline: $ou
+  &:hover
+    .share__sublist
+      display: block
+.share__sublist
+  position: absolute
+  top: 100%
+  left: 0
+  z-index: 10
+  width: 100%
+  display: none
+  background: #fff
+  a
+    display: block
+    padding: 5px 0
 
 
 

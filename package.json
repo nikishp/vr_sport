@@ -36,7 +36,8 @@
     "jquery": "^3.3.1",
     "magnific-popup": "^1.1.0",
     "slick-carousel": "^1.8.1",
-    "smart-grid": "^2.0.1"
+    "smart-grid": "^2.0.1",
+    "swiper": "^4.2.6"
   },
   "dependencies": {
     "@fancyapps/fancybox": "^3.3.5",
